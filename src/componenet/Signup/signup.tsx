@@ -52,42 +52,47 @@ const handleSubmit = async () => {
 
 
   return (
-    <div className='flex w-full justify-center items-center h-screen bg-[url("background_blue.jpg")] bg-repeat-round'>
-        <div className='bg-gradient-to-br from-slate-200 via-slate-400 to-slate-600 p-8 rounded-lg shadow-lg w-80'>
-            <h3 className='text-2xl font-bold mb-6 text-center text-green-700'>Sign up</h3>
-             <label>Name <span className='text-red-600'>*</span></label>
+    <div className='flex w-full  h-screen'>
+      <div className='text-white w-3/4 flex bg-red-400 h-screen justify-center items-center bg-[url(public/pexels-rquiros-2330137.jpg)] bg-repeat-round'>
+
+      </div>
+      <div className='flex w-1/4 bg-gradient-to-l from-neutral-600 via-neutral-900 to-neutral-950 h-screen justify-center items-center'>
+        <div className='bg-gradient-to-br from-slate-400 via-slate-800 to-slate-900  p-8 rounded-lg shadow-lg w-80'>
+            <h3 className='text-2xl font-bold mb-6 text-center text-white'>Sign up</h3>
+             <label className='text-white'>Name <span className='text-red-600'>*</span></label>
             <input
             type='text'
             required
             placeholder='Name'
             onChange={(e)=>seFullName(e.target.value)}
-            className='w-full mb-4 p-2 border border-gray-300 rounded'/>
-             <label>Email <span className='text-red-600'>*</span></label>
+            className='w-full mb-4 p-2 border border-gray-300 rounded placeholder:text-white'/>
+             <label className='text-white'>Email <span className='text-red-600'>*</span></label>
             <input
             type='email'
             required
             placeholder='Email'
             onChange={(e)=>setEmail(e.target.value)}
-            className='w-full mb-4 p-2 border border-gray-300 rounded'/>
-            <label>Password <span className='text-red-600'>*</span></label>
+            className='w-full mb-4 p-2 border border-gray-300 rounded placeholder:text-white'/>
+            <label className='text-white'>Password <span className='text-red-600'>*</span></label>
             <input
             type='password'
             placeholder='Password'
             required
             onChange={(e)=>setPassword(e.target.value)}
-            className='w-full mb-4 p-2 border border-gray-300 rounded'/>
-            <label>Mobile Number</label>
+            className='w-full mb-4 p-2 border border-gray-300 rounded placeholder:text-white'/>
+            <label className='text-white'>Mobile Number</label>
             <input
             type='text'
             placeholder='Phone Number'
             maxLength={10}
             onChange={(e)=>setMobile(e.target.value)}
-            className='w-full mb-4 p-2 border border-gray-300 rounded'/>
+            className='w-full mb-4 p-2 border border-gray-300 rounded placeholder:text-white '/>
             <div className='flex justify-center'>
-                <button onClick={handleSubmit} className='rounded bg-blue-800 p-2 text-white'>Submit</button>
+                <button onClick={handleSubmit} className='rounded bg-gradient-to-r from-orange-400 via-orange-600 to-orange-800 p-2 text-white'>Submit</button>
             </div>
             
         </div>
+       </div>
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
-import { FaHome, FaUser, FaShoppingCart, } from "react-icons/fa";
+import { FaHome, FaUser, FaShoppingCart,FaUserSecret } from "react-icons/fa";
 import { HiOutlineLogout } from "react-icons/hi";
 import ExitDialoge from '../ToastMessage/dialogue';
 import SBToast from '../ToastMessage/toast';
@@ -49,6 +49,7 @@ if(data.success){
     navigate('/')
   }
  
+ 
   return (
     <div className='flex bg-gray-100 h-20'>
       <nav className='bg-white text-white p-4 flex justify-between items-center w-full'>
@@ -79,6 +80,10 @@ if(data.success){
           <li className='inline-block mx-4 text-black cursor-pointer' onClick={(()=>navigate("/"))}>
             <FaHome/>
             <span>Home</span>
+          </li>
+           <li className='inline-block mx-4 text-black cursor-pointer' onClick={(()=>navigate("/users"))}>
+            <FaUserSecret />
+            <span>Users</span>
           </li>
           {user &&          
           <li className='inline-block mx-4 text-black cursor-pointer' onClick={()=>setShowAlert(true)}>

@@ -11,10 +11,11 @@ import Leftbar from './componenet/Sidebar/Leftbar/leftbar'
 import Productdetails from './componenet/Maincontent/Childcontent/Productdetails'
 import Booking from './componenet/Booking/booking'
 import Input_box from './componenet/Booking/input_box'
+import Users from './componenet/Users/users'
 function App() {
   const location=useLocation();
   const ishidden=location.pathname ==='/login' || location.pathname ==='/cart'|| location.pathname ==='/signup' || location.pathname==="/productdetails"|| location.pathname==='/booking'
-  || location.pathname==='/input_box';
+  || location.pathname==='/input_box' || location.pathname==='/users';
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar/>
@@ -25,6 +26,7 @@ function App() {
         <Route path="/productdetails" element={<Productdetails/>}/>
         <Route path='/booking' element={<Booking/>}/>
         <Route path='/input_box' element={<Input_box/>}/>
+        <Route path='/users' element={<Users/>}/>
       </Routes>
       
       {!ishidden &&(
