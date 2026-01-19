@@ -1,14 +1,17 @@
 type BookingButtonProps = {
   label?: string
   onClick?: () => void
+   type?: "button" | "submit" | "reset";
 }
 
 export default function BookingButton({
   label = "Book Now",
   onClick,
+  type='submit',
 }: BookingButtonProps) {
   return (
     <button
+    type={type}
       onClick={onClick}
       className="
         px-6 py-3

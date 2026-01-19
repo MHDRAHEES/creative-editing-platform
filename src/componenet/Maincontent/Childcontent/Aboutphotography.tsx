@@ -2,7 +2,7 @@ import React from 'react'
 
 function Aboutphotography() {
   return (
-<div className="flex justify-center min-h-screen items-start gap-8 bg-white p-8 pt-8 ">
+<div className="flex justify-center min-h-screen items-center gap-8 bg-white p-8 pt-8 ">
   {/* Reels Section */}
   <div className="flex  flex-col items-center w-[350px] bg-gray-100 rounded-lg p-4 text-black shadow-md rounded-lg cursor-pointer hover:scale-105 hover:bg-gray-100 transition-transform duration-300l̥">
     <img

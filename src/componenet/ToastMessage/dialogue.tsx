@@ -3,15 +3,15 @@ import React from 'react'
 type props={
 onConfirm:()=>void;
 onCancel:()=>void;
-
+message:string;
 }
 
-export default function ExitDialoge({onConfirm,onCancel}:props) {
+export default function Dialoge({onConfirm,onCancel,message}:props) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
       <div className="bg-white rounded-lg p-6 w-80 shadow-lg">
-        <h2 className="text-lg text-black font-semibold text-center mb-4">
-          Are you sure you want to Leave?
+        <h2 className="text-lg text-black font-semibold  mb-4">
+         {message}
         </h2>
         
       <div className='flex justify-end gap-4 mt-6'>

@@ -1,37 +1,28 @@
 import { Heart } from "lucide-react";
-import { useState } from "react";
 import { MdDelete } from "react-icons/md";
+import { useFavorites } from "../../context/FavoriteContext";
 
 interface MediaCardProps {
   fileUrl: string;
   fileType: string;
   caption?: string;
-  id: string; 
+  id: string;
   onDelete: (id: string) => void;
 }
 
-const MediaCard = ({ fileUrl, fileType, caption, id, onDelete  }: MediaCardProps) => {
-  const [liked, setLiked] = useState(false);
-  const [likes, setLikes] = useState(0);
-
-  console.log("MediaCard render:", id);
-
-  const handleLike = () => {
-    setLiked(!liked);
-    setLikes(liked ? likes - 1 : likes + 1);
-  };
+const MediaCard = ({ fileUrl, fileType, caption, id, onDelete }: MediaCardProps) => {
+  const { favorites, toggleFavourite } = useFavorites();
+  const isFav = favorites.includes(id);
 
   const handleDelete = async () => {
     try {
-      const res = await fetch(
-        `http://localhost:5000/api/media/delete/${id}`,
-        { method: "DELETE" }
-      );
+      const res = await fetch(`http://localhost:5000/api/media/${id}`, {
+        method: "DELETE",
+      });
 
       const data = await res.json();
-
       if (data.success) {
-        onDelete(id); // 🔥 removes image instantly
+        onDelete(id);
       }
     } catch (error) {
       console.error(error);
@@ -40,7 +31,9 @@ const MediaCard = ({ fileUrl, fileType, caption, id, onDelete  }: MediaCardProps
 
   return (
     <div className="max-w-sm bg-white border rounded-xl shadow-sm overflow-hidden">
-      <div className="w-full h-80 bg-white">
+
+      {/* MEDIA */}
+      <div className="w-full h-80 bg-white relative">
         {fileType.startsWith("video") ? (
           <video
             src={`http://localhost:5000${fileUrl}`}
@@ -54,32 +47,34 @@ const MediaCard = ({ fileUrl, fileType, caption, id, onDelete  }: MediaCardProps
             className="w-full h-full object-cover"
           />
         )}
-      </div>
 
-      <div className="flex w-full">
-        <div className="p-4 w-1/2">
-          <button onClick={handleLike} className="flex items-center gap-2">
-            <Heart
-              size={24}
-              className={`cursor-pointer ${
-                liked ? "fill-red-500 text-red-500" : "text-gray-600"
-              }`}
-            />
-            <span className="text-sm font-medium">{likes} likes</span>
-          </button>
-        </div>
-
-        <div className="flex justify-end p-4 w-1/2">
-          <MdDelete
-            className="text-red-600 w-6 h-6 cursor-pointer hover:text-red-800"
-            onClick={handleDelete}
+        {/* FAVORITE BUTTON */}
+        <button
+          onClick={() => toggleFavourite(id)}
+          className="absolute top-3 right-3 bg-white p-2 rounded-full shadow hover:scale-110 transition"
+        >
+          <Heart
+            size={22}
+            className={
+              isFav
+                ? "fill-red-500 text-red-500"
+                : "text-gray-600"
+            }
           />
-        </div>
+        </button>
       </div>
 
-      {caption && (
-        <p className="text-sm p-2">{caption}</p>
-      )}
+      {/* FOOTER */}
+      <div className="flex justify-between items-center p-3">
+        <p className="text-sm text-gray-700 truncate">
+          {caption}
+        </p>
+
+        <MdDelete
+          className="text-red-600 w-6 h-6 cursor-pointer hover:text-red-800"
+          onClick={handleDelete}
+        />
+      </div>
     </div>
   );
 };
