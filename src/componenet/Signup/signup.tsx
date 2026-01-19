@@ -53,8 +53,12 @@ const handleSubmit = async () => {
 
   return (
     <div className='flex w-full  h-screen'>
-      <div className='text-white w-3/4 flex bg-red-400 h-screen justify-center items-center bg-[url(public/pexels-rquiros-2330137.jpg)] bg-repeat-round'>
-
+      <div className='relative text-white w-3/4 h-screen  bg-[url(public/pexels-rquiros-2330137.jpg)] bg-cover bg-center'>
+        <div className='text-white flex flex-col items-center text-center mt-130'>
+        <h3 className='font-serif text-8xl'>Join Us</h3>
+        <h1 className='font-mono text-5xl'>Start your journey</h1>
+        <p>Create your account, unleash your creativity, and let your story come alive.</p>
+        </div>
       </div>
       <div className='flex w-1/4 bg-gradient-to-l from-neutral-600 via-neutral-900 to-neutral-950 h-screen justify-center items-center'>
         <div className='bg-gradient-to-br from-slate-400 via-slate-800 to-slate-900  p-8 rounded-lg shadow-lg w-80'>

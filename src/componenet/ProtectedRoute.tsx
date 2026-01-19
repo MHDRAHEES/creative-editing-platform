@@ -4,7 +4,7 @@ import type{ RootState } from "../Redux/store";
 import type { JSX } from "react";
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
-  const { token } = useSelector((state: RootState) => state.auth);
+  const  token  = useSelector((state: RootState) => state.auth);
 
   if (!token) return <Navigate to="/login" replace />;
 

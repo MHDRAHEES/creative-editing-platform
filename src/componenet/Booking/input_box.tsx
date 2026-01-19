@@ -1,65 +1,258 @@
 import React, { useState,useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { data, useLocation, useNavigate } from 'react-router-dom'
 import BookingButton from '../Modal/booking_button';
+import SBToast from '../ToastMessage/toast';
+interface User {
+  _id: string;
+  fullName: string;
+  email: string;
+  phone?: string;
+  isLOgin?: boolean;
+}
+function InputBox() {
+  const location = useLocation();
+  const navigate = useNavigate();
 
+  const boxname = location?.state?.selectBox || "";
 
-
-
-function input_box() {
-const location=useLocation();
-const boxname=location?.state?.selectBox
-const [categoryName,setCategoryName]=useState(boxname)
+  const [category, setCategory] = useState(boxname);
+  const [description, setDescription] = useState("");
+  const [phone, setPhone] = useState("");
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
- 
-const getUser=async()=>{
+  const [venue, setVenue] = useState(""); 
+  const [venueType, setVenueType] = useState("");
+  const [date,setDate]=useState("");
+  const [session_time,setSessionTime]=useState("");
+  const [user, setUser] = useState<User | null>(null);
+
+  const token = localStorage.getItem("token");
+  const getUser = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setUser(data.user);
+        setFullName(data.user.fullName);
+        setEmail(data.user.email);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    if (token) getUser();
+  }, [token]);
+
   
-}
-  return (
-    <div className='flex justify-center items-center min-h-screen  bg-[url("background_blue.jpg")] bg-repeat-round'>
-         <form className='grid gap-1  p-8 w-96 bg-gradient-to-br from-slate-200 via-slate-400 to-slate-600 rounded-xl shadow-2xl'>
-            <h2 className=' flex justify-center font-bold text-3xl'> For Booking</h2>
-             <label>Name <span className='text-red-600'>*</span></label>
-            <input
-            type='string'
-            placeholder='Name'
-            required
-            value={fullName}
-            onChange={((e)=>setFullName(e.target.value))}
-            className="p-3 rounded-md outline-1 focus:ring-2 focus:ring-orange-950 mb-4 p-2 "/>
-             <label>Email <span className='text-red-600'>*</span></label>
-            <input
-            type='email'
-            placeholder='Email'
-            value={email}
-            onChange={((e)=>setEmail(e.target.value))}
-            required
-             className="p-3 rounded-md outline-1 focus:ring-2 focus:ring-orange-950 mb-4 p-2"/>
-             <label>Mobile Number  <span className='text-red-600'>*</span></label>
-               <input
-            type='string'
-            maxLength={10}
-            required
-            placeholder='Mobile'
-             className="p-3 rounded-md outline-1 focus:ring-2 focus:ring-orange-950"/>
-              <label>Category <span className='text-red-600'>*</span></label>
-               <input
-            type='string'
-            value={boxname}
-            placeholder='Category'
-            onChange={((e)=>setCategoryName(e.target.value))}
-             className="p-3 rounded-md outline-1 focus:ring-2 focus:ring-orange-950"/>
-             <label>Description</label>
-               <input
-            type='string'
-            placeholder='Description'
-             className="p-3 rounded-md outline-1 focus:ring-2 focus:ring-orange-950"/>
-             <div className='flex justify-center mt-5'>
-                <BookingButton/>
-             </div>
-        </form>
+const handleSubmit = async () => {
+  if (!fullName || !email || !category || !phone || !description) {
+    SBToast.show("All fields are required", "warning");
+    return;
+  }
+
+  if (!token) {
+    SBToast.show("Login required", "error");
+    return;
+  }
+
+  try {
+    const res = await fetch("http://localhost:5000/api/booking", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        fullName,
+        email,
+        category,
+        phone,
+        description,
+        session_time,
+        venue,
+        venueType,
+        date
+
+      }),
+    });
+    const data = await res.json();
+    if (data.success) {
+      SBToast.show("Booking successfully", "success");
+      setTimeout(() => navigate("/success"), 1200);
+    } else {
+      SBToast.show(data.message || "Booking failed ", "error");
+    }
+  } catch (error) {
+    console.error(error);
+    SBToast.show("Server error ", "error");
+  }
+};
+
+
+ return (
+  <div className="min-h-screen bg-gray-50 p-6">
+
+    {/* Header */}
+    <div className="flex items-center gap-3 mb-6">
+      <button className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+        ←
+      </button>
+      <h1 className="text-xl font-semibold">For Booking</h1>
     </div>
-  )
+
+    {/* Form */}
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmit();
+      }}
+      className="bg-white p-6 rounded-lg shadow-sm min-h-screen"
+    >
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        {/* Salutation */}
+        <div>
+          <label className="text-sm text-gray-600">Salutation</label>
+          <select className="w-full mt-1 p-2 border rounded-md">
+            <option>Select Salutation</option>
+            <option>Mr</option>
+            <option>Mrs</option>
+            <option>Ms</option>
+          </select>
+        </div>
+
+        {/* First Name */}
+        <div>
+          <label className="text-sm text-gray-600">Name</label>
+            <span className='text-red-600'>*</span>
+          <input
+            type="text"
+            className="w-full mt-1 p-2 border rounded-md"
+            placeholder="First Name"
+            defaultValue={user?.fullName || ""}
+            onChange={(e) => setFullName(e.target.value)}
+          />
+        </div>
+
+        {/* Last Name */}
+       <div>
+          <label className="text-sm text-gray-600">Mobile Number</label>
+            <span className='text-red-600'>*</span>
+          <input
+            type="text"
+            maxLength={10}
+            className="w-full mt-1 p-2 border rounded-md"
+            onChange={(e) => setPhone(e.target.value)}
+          />
+        </div>
+
+        {/* Company Name */}
+        <div>
+          <label className="text-sm text-gray-600">Category</label>
+            <span className='text-red-600'>*</span>
+          <input
+            type="text"
+            className="w-full mt-1 p-2 border rounded-md"
+            placeholder="Company Name"
+            value={category}
+            onChange={(e)=>setCategory(e.target.value)}
+          />
+        </div>
+
+        {/* Primary Email */}
+        <div>
+          <label className="text-sm text-gray-600"> Email</label>
+            <span className='text-red-600'>*</span>
+          <input
+            type="email"
+            className="w-full mt-1 p-2 border rounded-md"
+            defaultValue={user?.email || email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+
+        {/* Secondary Email */}
+        <div>
+          <label className="text-sm text-gray-600">Place</label>
+            <span className='text-red-600'>*</span>
+          <input
+            type="text"
+            className="w-full mt-1 p-2 border rounded-md"
+            onChange={(e)=>setVenue(e.target.value)}
+          />
+        </div>
+
+         {/* Work Phone */}
+         <div>
+           <label className="text-sm text-gray-600">
+             Session Timing <span className="text-red-600">*</span>
+           </label>
+
+           <select className="w-full mt-1 p-2 border rounded-md"
+           onChange={(e)=>setSessionTime(e.target.value)}>
+             <option value="">Select Session Timing</option>
+             <option value="morning">Morning</option>
+             <option value="afternoon">Afternoon</option>
+             <option value="evening">Evening</option>
+             <option value="night">Night</option>
+           </select>
+         </div>
+
+
+        {/* Mobile */}
+         <div>
+          <label className="text-sm text-gray-600">Venue Type</label>
+            <span className='text-red-600'>*</span>
+          <select className="w-full mt-1 p-2 border rounded-md"
+          onChange={(e)=>setVenueType(e.target.value)}>
+             <option value="">Select Venue Type</option>
+             <option value="house">House</option>
+             <option value="auditorium">Auditorium</option>
+          </select>
+         
+          
+        </div>
+
+        {/* 📅 Date Picker */}
+        <div>
+          <label className="text-sm text-gray-600">Booking Date</label>
+          <span className='text-red-600'>*</span>
+          <input
+            type="date"
+            className="w-full mt-1 p-2 border rounded-md"
+            onChange={(e) => setDate(e.target.value)}
+          />
+        </div>
+
+        {/* Credit Limit */}
+        <div>
+          <label className="text-sm text-gray-600">Description</label>
+          <input
+            type="text"
+            className="w-full mt-1 p-2 border rounded-md h-20"
+            onChange={(e)=>setDescription(e.target.value)}
+          />
+        </div>
+
+      </div>
+
+      {/* Submit */}
+      <div className="flex justify-center pb-0">
+      <BookingButton/>
+      </div>
+    </form>
+  </div>
+);
+
+
 }
 
-export default input_box
+export default InputBox

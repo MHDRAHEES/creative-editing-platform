@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import SBtoast from '../ToastMessage/toast';
 import SBToast from '../ToastMessage/toast';
 import { useDispatch } from "react-redux";
-import { loginSuccess } from "../../Redux/authSlice";
+
 
 function login() {
     const navigate=useNavigate();
@@ -12,6 +12,7 @@ function login() {
     const [password,setPassword]=useState("")
     const [email,setEmail]=useState("")
     const[loading,setLoading]=useState(false)
+    const [isLogin,setLogin]=useState(false)
 const handleLogin = async () => {
   setLoading(true)
   try {
@@ -34,16 +35,10 @@ const handleLogin = async () => {
       }
 
     if (data.success) {
-    localStorage.setItem("token", data.token);
-
-
-
-      dispatch(
-        loginSuccess({
-          user: data.user,
-          token: data.token,
-        })
-      );
+   localStorage.setItem("token", data.token);
+   localStorage.setItem("email",email)
+    const isLogin = !!data.token; 
+    setLogin(true)
 console.log("DISPATCHED USER:", data.token);
      SBtoast.show("Login successful", "success");
       setTimeout(() => {
@@ -57,11 +52,15 @@ console.log("DISPATCHED USER:", data.token);
     }
 }
 
-    return (
-        <div className='flex w-full  h-screen'>
-        <div className='text-white w-3/4 flex bg-red-400 h-screen justify-center items-center bg-[url(public/pexels-rquiros-2330137.jpg)] bg-repeat-round'>
-         <h1>afesdvfdvgdf</h1>
+  return (
+    <div className='flex w-full  h-screen'>
+      <div className='relative text-white w-3/4 h-screen  bg-[url(public/pexels-rquiros-2330137.jpg)] bg-cover bg-center'>
+        <div className='text-white flex flex-col items-center text-center mt-130'>
+          <h3 className='font-serif text-8xl'>Welcome Back</h3>
+          <h1 className='font-mono text-5xl'>Step into your world</h1>
+          <p>Access your projects, continue your story, and make every moment count.</p>
         </div>
+      </div>
         <div className='flex w-1/4 bg-gradient-to-l from-neutral-600 via-neutral-900 to-neutral-950 h-screen justify-center items-center'> 
             <div className='bg-gradient-to-br from-slate-400 via-slate-800 to-slate-900 rounded-xl shadow-2xl p-8 rounded-lg shadow-lg w-80'>
                 <h2 className='text-2xl font-bold mb-6 text-center text-white'>Login</h2>

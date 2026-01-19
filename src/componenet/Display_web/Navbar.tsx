@@ -2,13 +2,14 @@ import React, { useState,useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
 import { FaHome, FaUser, FaShoppingCart,FaUserSecret } from "react-icons/fa";
 import { HiOutlineLogout } from "react-icons/hi";
-import ExitDialoge from '../ToastMessage/dialogue';
+import Dialoge from '../ToastMessage/dialogue';
 import SBToast from '../ToastMessage/toast';
 interface User {
   _id: string;
   fullName: string;
   email: string;
   phone?: string;
+  role?:string;
 }
 
 function Navbar() {
@@ -34,7 +35,6 @@ if(data.success){
   console.log(error)
 }
   }
-
     useEffect(() => {
     if (token) {
       getUser();
@@ -43,16 +43,15 @@ if(data.success){
 
   const handleSignout=()=>{
     localStorage.removeItem('token');
+    localStorage.removeItem('email');
     setUser(null);
     setShowAlert(false)
     SBToast.show("Logged out successfully",'success');
     navigate('/')
   }
- 
- 
   return (
     <div className='flex bg-gray-100 h-20'>
-      <nav className='bg-white text-white p-4 flex justify-between items-center w-full'>
+      <nav className='bg-white text-white p-4 flex justify-between items-center w-full '>
         <div className='flex'>
           <img
           src='public/jt.jpg'
@@ -62,39 +61,42 @@ if(data.success){
           <h1 className='flex  items-center font-extrabold text-lg italic font-serif text-stone-900 '>Just Think_s</h1>
         </div>
         
-        <ul className='list-none'>
+        <ul className='list-none font-bold capitalize '>
         {user ?(
            <li 
           onClick={(()=>navigate('/login'))}
           className='inline-block mx-4 text-black cursor-pointer'>
             <FaUser/>
-            <span>{user?.fullName}</span>
+            <span className='capitalize'>{user?.fullName}</span>
           </li>
         ):   <li 
           onClick={(()=>navigate('/login'))}
-          className='inline-block mx-4 text-black cursor-pointer'>
-            <FaUser/>
-            <span>Login</span>
+          className='inline-block mx-4 text-black cursor-pointer '>
+            <FaUser />
+            <span>LOGIN</span>
           </li>}
        
           <li className='inline-block mx-4 text-black cursor-pointer' onClick={(()=>navigate("/"))}>
             <FaHome/>
-            <span>Home</span>
+            <span>HOME</span>
           </li>
-           <li className='inline-block mx-4 text-black cursor-pointer' onClick={(()=>navigate("/users"))}>
+          {user?.role=="admin"&&     
+          <li className='inline-block mx-4 text-black cursor-pointer ' onClick={(()=>navigate("/users"))}>
             <FaUserSecret />
-            <span>Users</span>
-          </li>
+            <span>USERS</span>
+          </li>}
+       
           {user &&          
           <li className='inline-block mx-4 text-black cursor-pointer' onClick={()=>setShowAlert(true)}>
             <HiOutlineLogout/>
-            <span>Sign Out</span>
+            <span>SIGN OUT</span>
           </li>}
 
             {showAlert && (
-          <ExitDialoge
+          <Dialoge
           onConfirm={handleSignout}
           onCancel={() => setShowAlert(false)}
+          message='Are you sure you want to exit?'
         />)}
         </ul>
       </nav>
