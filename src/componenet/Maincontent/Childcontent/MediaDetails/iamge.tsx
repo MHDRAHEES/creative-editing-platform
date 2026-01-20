@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import UploadModal from "../../Modal/upload_modal";
-import MediaCard from "../../Modal/media_card";
+import UploadModal from "../../../Modal/upload_modal";
+import MediaCard from "../../../Modal/media_card";
 import { useNavigate } from "react-router-dom";
 
 interface MediaItem {
@@ -46,22 +46,32 @@ function ProductDetails() {
   /* ======================
      FETCH MEDIA
   ====================== */
-  const fetchMedia = async () => {
-    try {
-      const res = await fetch("http://localhost:5000/api/media", {
-        headers: token
-          ? { Authorization: `Bearer ${token}` }
-          : {},
-      });
+const fetchMedia = async () => {
+  try {
+    const res = await fetch("http://localhost:5000/api/media", {
+      headers: token
+        ? { Authorization: `Bearer ${token}` }
+        : {},
+    });
 
-      const data = await res.json();
-      setMediaList(Array.isArray(data) ? data : data.media || []);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+    const data = await res.json();
+
+    // Ensure we have an array
+    const mediaArray = Array.isArray(data) ? data : data.media || [];
+
+    // Keep only images
+    const imageOnly = mediaArray.filter((x: any) =>
+      x.fileType.startsWith("image/")
+    );
+
+    setMediaList(imageOnly);
+  } catch (err) {
+    console.error(err);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   useEffect(() => {
     fetchMedia();
@@ -119,7 +129,8 @@ function ProductDetails() {
       )}
 
       {/* MEDIA GRID */}
-      <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      {!showModal&&
+         <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {mediaList.map(media => (
           <MediaCard
             key={media._id}            // ✅ FIXED
@@ -131,6 +142,8 @@ function ProductDetails() {
           />
         ))}
       </div>
+      }
+   
     </div>
   );
 }

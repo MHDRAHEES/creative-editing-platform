@@ -4,6 +4,8 @@ import type { RootState, AppDispatch } from "../../Redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchUsers } from "../../Redux/userSlice";
+import { useNavigate } from "react-router-dom";
+import SBToast from "../ToastMessage/toast";
 
 interface User {
   _id: string;
@@ -13,6 +15,7 @@ interface User {
 }
 
 export default function BookingDetails() {
+  const navigate=useNavigate();
   const dispatch=useDispatch<AppDispatch>()
   const bookingdata=useSelector((state:RootState)=>state.booking.bookingData)
   const token=localStorage.getItem('token')
@@ -26,6 +29,7 @@ export default function BookingDetails() {
 
   },[bookingdata])
 
+const id=
   useEffect(() => {
     if (token) {
       dispatch(fetchUsers(token));
@@ -44,11 +48,36 @@ const filteredBooking = isAdmin
       return item.email === currentUser;
     });
 
+const handleDelete = async (id:string) => {
+  try {
+    const res = await fetch(
+      `http://localhost:5000/api/booking/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.message || "Delete failed");
+    }
+
+    SBToast.show("Booking deleted successfully", "success");
+  } catch (error: any) {
+    console.error(error);
+    SBToast.show(error.message || "Something went wrong", "error");
+  }
+};
+
   return (
   <div className="min-h-screen bg-gray-100 p-4">
          {/* Header */}
         <div className="flex items-center gap-3 mb-4">
-          {/* <ArrowLeft className="w-5 h-5" /> */}
+          <ArrowLeft className="w-5 h-5" onClick={()=>navigate(-1)} />
           <h1 className="text-lg font-semibold">Booking Details</h1>
         </div>
 
@@ -66,9 +95,6 @@ const filteredBooking = isAdmin
         </div>
     {filteredBooking.map((data: any, index: number) => (
       <div key={data._id || index} className="mb-6">
-
-   
-
         {/* Booking Info */}
         <div className="bg-white rounded-xl p-4 shadow mb-4">
           <h2 className="font-semibold text-base">
@@ -93,7 +119,7 @@ const filteredBooking = isAdmin
             </div>
             <div>
               <p className="text-gray-500">Venue Type</p>
-              <p className="font-medium">{data.venu_type}</p>
+              <p className="font-medium">{data.venu_Type}</p>
             </div>
             <div>
               <p className="text-gray-500">Mobile Number</p>
@@ -125,7 +151,7 @@ const filteredBooking = isAdmin
             <button className="bg-teal-600 text-white py-3 rounded-xl font-medium">
               Book Again
             </button>
-            <button className="border border-teal-600 text-teal-600 py-3 rounded-xl font-medium">
+            <button onClick={(()=>handleDelete(data._id))} className="border border-teal-600 text-teal-600 py-3 rounded-xl font-medium">
               Cancel Booking
             </button>
           </div>

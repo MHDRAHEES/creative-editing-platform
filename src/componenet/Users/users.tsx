@@ -7,9 +7,12 @@ import type { RootState, AppDispatch } from "../../Redux/store";
 import EditModal from "../Modal/editModal";
 import Dialoge from "../ToastMessage/dialogue";
 import { User } from "lucide-react";
-
+import SBToast from "../ToastMessage/toast";
+import { ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 function Users() {
   const dispatch = useDispatch<AppDispatch>();
+  const navigate=useNavigate();
   const token = localStorage.getItem("token");
   const users = useSelector((state: RootState) => state.auth.users);
   const[showModal,setShowModal]=useState(false)
@@ -24,30 +27,53 @@ function Users() {
   }, [token, dispatch]);
   useEffect(() => {
   }, [users]);
-const handleConfirmDialog = () => {
+
+ const handleConfirmDialog = async () => {
+  if (!selectedUser) return;
+
+  const id = selectedUser._id;
+
   if (alertAction === "edit") {
-    setShowModal(true); // open edit modal
+    setShowModal(true);
   }
 
   if (alertAction === "delete") {
-    console.log("Delete user:", selectedUser);
-    // TODO: call your delete API here
+    try {
+      const res = await fetch(`http://localhost:5000/api/user/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        SBToast.show("User deleted successfully", "success");
+        dispatch(fetchUsers(token!)); // refresh list
+      }
+    } catch (error) {
+      console.error(error);
+      SBToast.show("Delete failed", "error");
+    }
   }
 
   setShowDialoge(false);
-  setAlertAction(null); // reset action
+  setAlertAction(null);
 };
 
 return (
   <div className="w-full min-h-screen bg-slate-900 p-6">
     <div className={`w-full mx-auto bg-white rounded-lg shadow-md overflow-hidden transition
           ${showModal ? "blur-sm pointer-events-none" : ""}`}>
-      <div className="px-6 py-4 border-b">
+      <div className="px-6 py-4 border-b flex items-center gap-3">
+        <ArrowLeft
+          className="w-5 h-5 cursor-pointer"
+          onClick={() => navigate(-1)}/>
         <h2 className="text-xl font-semibold text-gray-800">
           Users List
         </h2>
       </div>
-
       <div className="overflow-x-auto">
         <table className="w-full text-sm text-left text-gray-700">
           <thead className="bg-gray-100 text-gray-600 uppercase text-xs">
@@ -59,7 +85,6 @@ return (
               <th className="px-6 py-3 text-right">Actions</th>
             </tr>
           </thead>
-
           <tbody className="divide-y">
             {users?.length > 0 ? (
               users.map((user: any) => (
