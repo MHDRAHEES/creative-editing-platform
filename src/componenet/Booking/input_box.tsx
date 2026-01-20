@@ -21,7 +21,7 @@ function InputBox() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [venue, setVenue] = useState(""); 
-  const [venueType, setVenueType] = useState("");
+  const [venue_type, setVenueType] = useState("");
   const [date,setDate]=useState("");
   const [session_time,setSessionTime]=useState("");
   const [user, setUser] = useState<User | null>(null);
@@ -78,7 +78,7 @@ const handleSubmit = async () => {
         description,
         session_time,
         venue,
-        venueType,
+        venue_type,
         date
 
       }),

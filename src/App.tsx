@@ -8,7 +8,8 @@ import Login from './componenet/Login/login'
 import Favourite from './componenet/Favourite/favourite'
 import Signup from './componenet/Signup/signup'
 import Leftbar from './componenet/Sidebar/Leftbar/leftbar'
-import Productdetails from './componenet/Maincontent/Childcontent/Productdetails'
+import Image from './componenet/Maincontent/Childcontent/MediaDetails/iamge'
+import Video from './componenet/Maincontent/Childcontent/MediaDetails/video'
 import Booking from './componenet/Booking/booking'
 import Input_box from './componenet/Booking/input_box'
 import Users from './componenet/Users/users'
@@ -16,8 +17,8 @@ import Final from './componenet/Booking/final'
 import BookingDetails from './componenet/Booking/bookingDetails'
 function App() {
   const location=useLocation();
-  const ishidden=location.pathname ==='/login' || location.pathname ==='/favourite'|| location.pathname ==='/signup' || location.pathname==="/productdetails"|| location.pathname==='/booking'
-  || location.pathname==='/input_box' || location.pathname==='/users' || location.pathname==='/success' || location.pathname==='/booking_details';
+  const ishidden=location.pathname ==='/login' || location.pathname ==='/favourite'|| location.pathname ==='/signup' || location.pathname==="/image"|| location.pathname==="/video"|| location.pathname==='/booking'
+  || location.pathname==='/input_box' || location.pathname==='/users' || location.pathname==='/success' || location.pathname==='/booking_details' ;
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar/>
@@ -25,7 +26,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/favourite" element={<Favourite />}/>
         <Route path="/signup" element={<Signup/>}/>
-        <Route path="/productdetails" element={<Productdetails/>}/>
+        <Route path="/image" element={<Image/>}/>
+        <Route path="/video" element={<Video/>}/>
         <Route path='/booking' element={<Booking/>}/>
         <Route path='/input_box' element={<Input_box/>}/>
         <Route path='/users' element={<Users/>}/>
