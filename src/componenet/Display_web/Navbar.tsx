@@ -51,43 +51,43 @@ if(data.success){
   }
   return (
     <div className='flex bg-gray-100 h-20'>
-      <nav className='bg-white text-white p-4 flex justify-between items-center w-full '>
+      <nav className='bg-black text-white p-4 flex justify-between items-center w-full '>
         <div className='flex'>
           <img
-          src='public/jt.jpg'
+          src='ChatGPT Image Jan 24, 2026, 01_23_01 PM.png'
           alt='logo'
           className='w-25 h-18'
           />
-          <h1 className='flex  items-center font-extrabold text-lg italic font-serif text-stone-900 '>Just Think_s</h1>
+          <h1 className='flex  items-center font-extrabold text-lg italic font-serif text-white p-5 '>Just Think_s</h1>
         </div>
         
         <ul className='list-none font-bold capitalize '>
         {user ?(
            <li 
           onClick={(()=>navigate('/login'))}
-          className='inline-block mx-4 text-black cursor-pointer'>
+          className='inline-block mx-4 text-white cursor-pointer'>
             <FaUser/>
             <span className='capitalize'>{user?.fullName}</span>
           </li>
         ):   <li 
           onClick={(()=>navigate('/login'))}
-          className='inline-block mx-4 text-black cursor-pointer '>
+          className='inline-block mx-4 text-white cursor-pointer '>
             <FaUser />
             <span>LOGIN</span>
           </li>}
        
-          <li className='inline-block mx-4 text-black cursor-pointer' onClick={(()=>navigate("/"))}>
+          <li className='inline-block mx-4 text-white cursor-pointer' onClick={(()=>navigate("/"))}>
             <FaHome/>
             <span>HOME</span>
           </li>
           {user?.role=="admin"&&     
-          <li className='inline-block mx-4 text-black cursor-pointer ' onClick={(()=>navigate("/users"))}>
+          <li className='inline-block mx-4 text-white cursor-pointer ' onClick={(()=>navigate("/users"))}>
             <FaUserSecret />
             <span>USERS</span>
           </li>}
        
           {user &&          
-          <li className='inline-block mx-4 text-black cursor-pointer' onClick={()=>setShowAlert(true)}>
+          <li className='inline-block mx-4 text-white cursor-pointer' onClick={()=>setShowAlert(true)}>
             <HiOutlineLogout/>
             <span>SIGN OUT</span>
           </li>}

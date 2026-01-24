@@ -20,8 +20,6 @@ const EditModal: React.FC<EditModalProps> = ({
 }) => {
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
-console.log(user,"jjjjjjjjjjjjjj");
-
   // ✅ populate fields when modal opens
   useEffect(() => {
     if (user) {
@@ -102,6 +100,7 @@ console.log(user,"jjjjjjjjjjjjjj");
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               className="w-full mt-1 px-3 py-2 border rounded"
+              maxLength={10}
             />
           </div>
         </div>
