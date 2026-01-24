@@ -20,7 +20,7 @@ const handleVideo=(()=>{
                     </svg>
                 </button>
                 <div className="w-16 h-[2px] bg-orange-500 self-start ml-[31%]"></div>
-                <h3 className="text-xl text-white italic font-serif mt-6 self-start ml-[31%] mb-2">Beautiful Bride</h3>
+                <h3 className="text-xl text-white italic font-serif mt-6 self-start ml-[31%] mb-2">Captured Moments</h3>
                 <p className="text-sm text-zinc-500">The most important moment of thier <br /> lives magically captured</p>
             </div>
 
@@ -34,8 +34,8 @@ const handleVideo=(()=>{
                     </svg>
                 </button>
                 <div className="w-16 h-[2px] bg-orange-500 self-start ml-[31%]"></div>
-                <h3 className="text-xl text-white italic font-serif mt-6 self-start ml-[31%] mb-2">Natural Lightness</h3>
-                <p className="text-sm text-zinc-500 self-start ml-[31%]">Unique exposure with a  great <br /> sense of depth</p>
+                <h3 className="text-xl text-white italic font-serif mt-6 self-start ml-[31%] mb-2">Living Memories</h3>
+                <p className="text-sm text-zinc-500 self-start ml-[31%]">Stories that move, moments that last.</p>
             </div>
             
         </div>

@@ -34,9 +34,11 @@ function Favourite() {
 console.log(favoriteMedia,"jjjjjjjjjjj");
 
   return (
-    <div className="p-6 min-h-screen bg-gray-100">
+    <div className="p-6 min-h-screen bg-gray-100 flex flex-col items-center justify-center">
       <h1 className="text-xl font-bold mb-4">❤️ Favourite Media</h1>
-
+       <h1 className="text-xl font-bold mb-4">Feature under development
+</h1>
+{/* 
       {favoriteMedia.length === 0 ? (
         <p className="text-gray-600">No favourites yet</p>
       ) : (
@@ -52,7 +54,7 @@ console.log(favoriteMedia,"jjjjjjjjjjj");
             />
           ))}
         </div>
-      )}
+      )} */}
     </div>
   );
 }

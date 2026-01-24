@@ -49,7 +49,7 @@ const MediaCard = ({ fileUrl, fileType, caption, id, onDelete }: MediaCardProps)
         )}
 
         {/* FAVORITE BUTTON */}
-        <button
+        {/* <button
           onClick={() => toggleFavourite(id)}
           className="absolute top-3 right-3 bg-white p-2 rounded-full shadow hover:scale-110 transition"
         >
@@ -61,7 +61,7 @@ const MediaCard = ({ fileUrl, fileType, caption, id, onDelete }: MediaCardProps)
                 : "text-gray-600"
             }
           />
-        </button>
+        </button> */}
       </div>
 
       {/* FOOTER */}

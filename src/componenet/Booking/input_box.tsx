@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react'
 import { data, useLocation, useNavigate } from 'react-router-dom'
 import BookingButton from '../Modal/booking_button';
 import SBToast from '../ToastMessage/toast';
+import { ArrowLeft } from 'lucide-react';
 interface User {
   _id: string;
   fullName: string;
@@ -102,9 +103,7 @@ const handleSubmit = async () => {
 
     {/* Header */}
     <div className="flex items-center gap-3 mb-6">
-      <button className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
-        ←
-      </button>
+     <ArrowLeft className="w-5 h-5" onClick={()=>navigate(-1)} />
       <h1 className="text-xl font-semibold">For Booking</h1>
     </div>
 
