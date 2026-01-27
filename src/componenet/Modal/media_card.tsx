@@ -1,6 +1,6 @@
-import { Heart } from "lucide-react";
+// import { Heart } from "lucide-react";
 import { MdDelete } from "react-icons/md";
-import { useFavorites } from "../../context/FavoriteContext";
+// import { useFavorites } from "../../context/FavoriteContext";
 
 interface MediaCardProps {
   fileUrl: string;
@@ -11,8 +11,8 @@ interface MediaCardProps {
 }
 
 const MediaCard = ({ fileUrl, fileType, caption, id, onDelete }: MediaCardProps) => {
-  const { favorites, toggleFavourite } = useFavorites();
-  const isFav = favorites.includes(id);
+  // const { favorites, toggleFavourite } = useFavorites();
+  // const isFav = favorites.includes(id);
 
   const handleDelete = async () => {
     try {

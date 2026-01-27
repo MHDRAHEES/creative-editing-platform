@@ -1,5 +1,4 @@
-import React from 'react'
-import { ChevronDown } from "lucide-react";
+// import { ChevronDown } from "lucide-react";
 import { FaFacebookF, FaInstagram, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 

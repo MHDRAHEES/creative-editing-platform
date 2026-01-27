@@ -22,14 +22,15 @@ export default function BookingDetails() {
   const users=useSelector((state:RootState)=>state.auth.users)as User[]
 
   useEffect(()=>{
-    dispatch(fetchBookingData())
-  },[dispatch])
+    if (token) {
+      dispatch(fetchBookingData(token))
+    }
+  },[dispatch, token])
 
   useEffect(()=>{
 
   },[bookingdata])
 
-const id=
   useEffect(() => {
     if (token) {
       dispatch(fetchUsers(token));

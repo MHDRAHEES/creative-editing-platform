@@ -1,6 +1,6 @@
-import React, { useState,useEffect } from 'react'
+import { useState,useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
-import { FaHome, FaUser, FaShoppingCart,FaUserSecret } from "react-icons/fa";
+import { FaHome, FaUser,FaUserSecret } from "react-icons/fa";
 import { HiOutlineLogout } from "react-icons/hi";
 import Dialoge from '../ToastMessage/dialogue';
 import SBToast from '../ToastMessage/toast';

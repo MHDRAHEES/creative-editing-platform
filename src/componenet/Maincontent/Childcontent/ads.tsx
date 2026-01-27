@@ -1,11 +1,11 @@
-import React from "react";
+// import React from "react";
 import SimpleImageSlider from "react-simple-image-slider";
 
 interface AdsProps {
   data: any[];
 }
 ;
-function Ads({ data }: AdsProps) {
+function Ads({}: AdsProps) {
 
     
 const images = [

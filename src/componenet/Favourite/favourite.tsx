@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import MediaCard from "../Modal/media_card";
+// import MediaCard from "../Modal/media_card";
 import { useFavorites } from "../../context/FavoriteContext";
 
 interface MediaItem {

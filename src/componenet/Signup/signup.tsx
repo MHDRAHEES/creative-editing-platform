@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import SBtoast from '../ToastMessage/toast';
-import { Target } from 'lucide-react';
-import SBToast from '../ToastMessage/toast';
+// import { Target } from 'lucide-react';
+// import SBToast from '../ToastMessage/toast';
 
 function signup() {
   const navigate=useNavigate();
@@ -10,8 +10,8 @@ function signup() {
   const [email, setEmail] = useState("")
   const [mobile, setMobile] = useState("")
     const [password, setPassword] = useState("")
-  const [description, setDescription] = useState("")
-  const [categoryName, setCategoryName] = useState("")
+  // const [description, setDescription] = useState("")
+  // const [categoryName, setCategoryName] = useState("")
 const handleSubmit = async () => {
   if (!email&&!fullName&&!password){
      SBtoast.show('All fields required','warning')

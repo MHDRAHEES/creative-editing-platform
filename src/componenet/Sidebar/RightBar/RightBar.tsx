@@ -1,4 +1,3 @@
-import React from "react";
 import { Video, Music, Facebook } from "lucide-react";
 
 function RightBar() {

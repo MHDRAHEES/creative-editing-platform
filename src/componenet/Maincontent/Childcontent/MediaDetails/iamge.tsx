@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import UploadModal from "../../../Modal/upload_modal";
 import MediaCard from "../../../Modal/media_card";
 import { useNavigate } from "react-router-dom";

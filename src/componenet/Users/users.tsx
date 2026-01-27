@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,7 +6,7 @@ import { fetchUsers } from "../../Redux/userSlice";
 import type { RootState, AppDispatch } from "../../Redux/store";
 import EditModal from "../Modal/editModal";
 import Dialoge from "../ToastMessage/dialogue";
-import { User } from "lucide-react";
+// import { User } from "lucide-react";
 import SBToast from "../ToastMessage/toast";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";

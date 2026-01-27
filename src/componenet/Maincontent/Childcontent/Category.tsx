@@ -1,12 +1,12 @@
-import React from 'react'
+// import React from 'react'
 import { FaFacebookSquare ,FaWhatsapp, FaInstagram } from "react-icons/fa";
 import Booking_button from '../../Modal/booking_button';
 import { useNavigate } from 'react-router-dom';
 
-interface CategoryProps{
-    data:any[]
-}
-function Category(data:CategoryProps) {
+// interface CategoryProps{
+//     data:any[]
+// }
+function Category() {
   const navigate=useNavigate()
   return (
     <div className='flex justify-start bg-[url(public/pexels-rquiros-2330137.jpg)]  items-top  min-h-screen bg-repeat-round'>

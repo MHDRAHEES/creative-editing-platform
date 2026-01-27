@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import Category from "./Childcontent/Category";
 import Ads from "./Childcontent/ads";
 import Product from "./Childcontent/product";
@@ -54,7 +54,7 @@ const handleRightShowbar=()=>{
             : ""
         }`}
     >
-      <Category data={products} />
+      <Category  />
       <Aboutphotography/>
       <Ads data={products} />
       <Product  />

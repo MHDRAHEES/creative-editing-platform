@@ -1,18 +1,18 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import SBtoast from '../ToastMessage/toast';
-import SBToast from '../ToastMessage/toast';
-import { useDispatch } from "react-redux";
+// import SBToast from '../ToastMessage/toast';
+// import { useDispatch } from "react-redux";
 
 
 function login() {
     const navigate=useNavigate();
-    const dispatch = useDispatch();
-    const [name,setName]=useState("")
+    // const dispatch = useDispatch();
+    // const [name,setName]=useState("")
     const [password,setPassword]=useState("")
     const [email,setEmail]=useState("")
     const[loading,setLoading]=useState(false)
-    const [isLogin,setLogin]=useState(false)
+    // const [isLogin,setLogin]=useState(false)
 const handleLogin = async () => {
   setLoading(true)
   try {
@@ -37,8 +37,8 @@ const handleLogin = async () => {
     if (data.success) {
    localStorage.setItem("token", data.token);
    localStorage.setItem("email",email)
-    const isLogin = !!data.token; 
-    setLogin(true)
+    // const login = !!data.token; 
+    // setLogin(true)
 console.log("DISPATCHED USER:", data.token);
      SBtoast.show("Login successful", "success");
       setTimeout(() => {

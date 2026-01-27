@@ -1,5 +1,5 @@
-import React, { useState,useEffect } from 'react'
-import { data, useLocation, useNavigate } from 'react-router-dom'
+import  { useState,useEffect } from 'react'
+import {  useLocation, useNavigate } from 'react-router-dom'
 import BookingButton from '../Modal/booking_button';
 import SBToast from '../ToastMessage/toast';
 import { ArrowLeft } from 'lucide-react';
