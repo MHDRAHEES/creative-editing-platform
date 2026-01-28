@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 function Category() {
   const navigate=useNavigate()
   return (
-    <div className='flex justify-start bg-[url(public/pexels-rquiros-2330137.jpg)]  items-top  min-h-screen bg-repeat-round'>
+    <div className='flex justify-start bg-[url(pexels-rquiros-2330137.jpg)]  items-top  min-h-screen bg-repeat-round'>
       <ul className='flex space-x-6 text-white text-2x p-5'> 
         <li><FaWhatsapp className=' text-5xl'/></li>
         <li><FaFacebookSquare className=' text-5xl'/></li>
