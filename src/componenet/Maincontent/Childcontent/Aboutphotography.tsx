@@ -6,7 +6,7 @@ function Aboutphotography() {
   {/* Reels Section */}
   <div className="flex  flex-col items-center w-[350px] bg-gray-100 rounded-lg p-4 text-black shadow-md rounded-lg cursor-pointer hover:scale-105 hover:bg-gray-100 transition-transform duration-300l̥">
     <img
-      src="public/young-teenage-girls-recording-reels-themselves-outdoors-social-media (1).jpg"
+      src="/young-teenage-girls-recording-reels-themselves-outdoors-social-media (1).jpg"
       alt="reels"
       className="w-full h-100 object-cover rounded-md"
     />
@@ -20,7 +20,7 @@ function Aboutphotography() {
   {/* Wedding Section */}
   <div className="flex flex-col items-center w-[350px] bg-gray-100 rounded-lg p-4 text-black shadow-md rounded-lg cursor-pointer hover:scale-105 hover:bg-gray-100 transition-transform duration-300">
     <img
-      src="public/full-shot-happy-couple-with-flowers.jpg"
+      src="/full-shot-happy-couple-with-flowers.jpg"
       alt="wedding"
       className="w-full h-100 object-cover rounded-md"
     />
@@ -34,7 +34,7 @@ function Aboutphotography() {
   {/* DJ Party Section */}
   <div className="flex flex-col items-center w-[350px] bg-gray-100 rounded-lg p-4 text-black shadow-md rounded-lg cursor-pointer hover:scale-105 hover:bg-gray-100 transition-transform duration-300">
     <img
-      src="public/happy-female-dj-entertaining-big-crowd.jpg"
+      src="/happy-female-dj-entertaining-big-crowd.jpg"
       alt="party"
       className="w-full h-100 object-cover rounded-md"
     />

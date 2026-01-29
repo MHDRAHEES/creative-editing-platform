@@ -25,7 +25,7 @@ const handleVideo=(()=>{
             </div>
 
             <div className="flex w-1/3 bg-slate-900 border-2 border-white">
-            <img src="public/medium-shot-unknown-woman-posing.jpg" alt="content" className="w-full min-h-screen"/>
+            <img src="/medium-shot-unknown-woman-posing.jpg" alt="content" className="w-full min-h-screen"/>
             </div>
             <div className="flex w-1/3 bg-gray-900 border-2 border-white justify-center items-center flex-col p-4">
                 <button onClick={handleVideo} type="button" className="  mb-2 self-start ml-[31%] text-white bg-blue-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">
