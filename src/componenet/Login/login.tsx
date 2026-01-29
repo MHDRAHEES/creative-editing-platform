@@ -54,7 +54,7 @@ console.log("DISPATCHED USER:", data.token);
 
   return (
     <div className='flex w-full  h-screen'>
-      <div className='relative text-white w-3/4 h-screen  bg-[url(public/pexels-rquiros-2330137.jpg)] bg-cover bg-center'>
+      <div className='relative text-white w-3/4 h-screen  bg-[url(/pexels-rquiros-2330137.jpg)] bg-cover bg-center'>
         <div className='text-white flex flex-col items-center text-center mt-130'>
           <h3 className='font-serif text-8xl'>Welcome Back</h3>
           <h1 className='font-mono text-5xl'>Step into your world</h1>

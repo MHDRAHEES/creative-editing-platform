@@ -9,9 +9,9 @@ function Ads({}: AdsProps) {
 
     
 const images = [
-  { url: "public/brunette-woman-looking-clapperboard.jpg"},
-  { url: "public/50390.jpg" },
-  { url: "public/133536.jpg"},
+  { url: "/brunette-woman-looking-clapperboard.jpg"},
+  { url: "/50390.jpg" },
+  { url: "/133536.jpg"},
 ];
   return (
     <div className="flex gap-6 flex-wrap p-6 justify-center">

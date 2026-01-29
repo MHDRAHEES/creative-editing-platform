@@ -54,7 +54,7 @@ const handleSubmit = async () => {
 
   return (
     <div className='flex w-full  h-screen'>
-      <div className='relative text-white w-3/4 h-screen  bg-[url(public/pexels-rquiros-2330137.jpg)] bg-cover bg-center'>
+      <div className='relative text-white w-3/4 h-screen  bg-[url(/pexels-rquiros-2330137.jpg)] bg-cover bg-center'>
         <div className='text-white flex flex-col items-center text-center mt-130'>
         <h3 className='font-serif text-8xl'>Join Us</h3>
         <h1 className='font-mono text-5xl'>Start your journey</h1>
