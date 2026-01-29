@@ -6,6 +6,7 @@ import SBtoast from '../ToastMessage/toast';
 
 function signup() {
   const navigate=useNavigate();
+  const API_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:5000";
   const [fullName,seFullName]=useState("")
   const [email, setEmail] = useState("")
   const [mobile, setMobile] = useState("")
@@ -18,7 +19,7 @@ const handleSubmit = async () => {
      return;
   }
   try {
-    const res = await fetch("http://localhost:5000/api/auth/signup", {
+    const res = await fetch(`${API_URL}/api/auth/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
